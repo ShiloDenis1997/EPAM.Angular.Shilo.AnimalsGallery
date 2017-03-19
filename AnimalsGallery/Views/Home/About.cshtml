@@ -1,0 +1,24 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<div class="container-fluid text-center">
+    <h3>Info about us</h3>
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="info in information">
+            <div>
+                <img src="http://www.popmeh.ru/upload/iblock/1d3/1d36d9dd3c9b46f777d0507205cc74b6.jpg" alt="Image" width="300" height="250" />
+                <br/>
+                <div>
+                    <div ng-hide="info.edit">{{info.text}}</div>
+                    <textarea class="about-edit" ng-model="info.text" ng-show="info.edit"></textarea>
+                </div>
+                <div class="pull-right">
+                    <button ng-click="toggleEdit(info)">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <div>
+        <input type="text" ng-model="animalLink" name="urlPicture" />
+        <input type="text" ng-model="animalName" name="animalName" />
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" ng-click="getImage()">Add image</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="text" ng-model="albumName" />
+    </div>
+    <div style="height: 305px">
+        <div uib-carousel active="active">
+            <div uib-slide ng-repeat="slide in album[albumName]" index="$index">
+                <img ng-src="{{slide.image}}" ng-click="deleteImage($index)" style="margin: auto; width: 400px; height: 305px;">
+                <div class="carousel-caption">
+                    <p>{{slide.desc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="animals">
+<head>
+    <base href="/"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal gallery</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-sanitize.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Angular/About">Animals gallery</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Angular/Albums">Albums</a></li>
+                    <li><a href="/Angular/Gallery">Gallery</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+    <script src="~/Scripts/gallery/main.js"></script>
+</body>
+</html>
