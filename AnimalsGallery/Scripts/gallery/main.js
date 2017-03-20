@@ -168,3 +168,8 @@ angular.module('animals').config(['$locationProvider', '$routeProvider',
         $locationProvider.html5Mode(true);
     }
 ]);
+
+$(document).ready(function () {
+    /* affix the navbar after scroll below header */
+    $(".navbar").affix({ offset: { top: $("header").outerHeight(true) } });
+});
