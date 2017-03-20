@@ -17,10 +17,13 @@
     <script src="~/Scripts/angular-route.js"></script>
 </head>
 <body>
-<header>
-    Hello from header
-</header>
-        <nav class="navbar navbar-inverse" role="navigation">
+    <header ng-controller="IndexController" class="animals-header">
+        <h2 class="text-center no-margin">
+            Welcome to the animals gallery, <span ng-bind="user.name"></span>!
+        </h2>
+    </header>
+    <div ng-controller="IndexController" id="nav" data-spy="affix" data-offset-top="{{height}}">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle"
@@ -43,6 +46,7 @@
                 </div>
             </div>
         </nav>
+    </div>
                     @RenderBody()
                     <script src="~/Scripts/gallery/main.js"></script>
 </body>

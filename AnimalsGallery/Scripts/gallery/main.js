@@ -145,6 +145,17 @@ angular.module('animals')
         }
     ]);
 
+angular.module('animals')
+    .controller('IndexController',
+    [
+        '$scope', function ($scope) {
+            console.log('hello from indexController');
+            $scope.height = $('header').outerHeight(true);
+            console.log($scope.height);
+            $scope.user = { name: "Denis" };
+        }
+    ]);
+
 angular.module('animals').config(['$locationProvider', '$routeProvider',
     function ($locationProvider, $routeProvider) {
         console.log("hello from config");
@@ -168,8 +179,3 @@ angular.module('animals').config(['$locationProvider', '$routeProvider',
         $locationProvider.html5Mode(true);
     }
 ]);
-
-$(document).ready(function () {
-    /* affix the navbar after scroll below header */
-    $(".navbar").affix({ offset: { top: $("header").outerHeight(true) } });
-});

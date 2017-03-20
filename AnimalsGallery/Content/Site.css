@@ -30,6 +30,16 @@ textarea {
     z-index:10;
 }
 
-.affix + .container-fluid {
+.affix + div {
     padding-top: 70px;
+}
+
+.animals-header {
+    padding-top: 30px; 
+    padding-bottom: 30px;
+    background: #c6cbd0;
+}
+
+.no-margin {
+    margin: 0;
 }
