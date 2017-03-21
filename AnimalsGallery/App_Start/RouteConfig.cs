@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +18,11 @@ namespace AnimalsGallery
                 name: "AngularRoute",
                 url: "Angular/{*url}",
                 defaults: new { controller = "Home", action = "Index" }
+                );
+            routes.MapRoute(
+                name: "PictureRoutes",
+                url: "Pictures/Picture/{albumName}",
+                defaults: new { controller="Pictures", action="Picture", albumName = "pandaria"}
                 );
             routes.MapRoute(
                 name: "Default",
