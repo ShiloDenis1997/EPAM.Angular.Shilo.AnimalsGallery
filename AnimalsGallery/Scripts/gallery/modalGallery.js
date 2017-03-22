@@ -6,6 +6,7 @@
             $ctrl.id = 0;
             $scope.albumName = "pandas";
             $ctrl.albums = imageService.getImages;
+            console.log($ctrl.albums);
             $ctrl.items = [];
             $ctrl.active = 0;
             $ctrl.animationsEnabled = true;

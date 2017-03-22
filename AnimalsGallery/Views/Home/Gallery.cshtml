@@ -4,8 +4,8 @@
 
 <div>
     <div>
-        <input type="text" ng-model="animalLink" name="urlPicture" />
-        <input type="text" ng-model="animalName" name="animalName" />
+        <input id="animalLinkInput" type="text" ng-model="animalLink" name="urlPicture" />
+        <input id="animalNameInput" type="text" ng-model="animalName" name="animalName" />
         <div class="row">
             <div class="col-md-6">
                 <button type="button" class="btn btn-info" ng-click="getImage()">Add image</button>
@@ -18,10 +18,11 @@
     <div style="height: 305px">
         <div uib-carousel active="active">
             <div uib-slide ng-repeat="slide in album[albumName]" index="$index">
-                <img ng-src="{{slide.image}}" ng-click="deleteImage($index)" style="margin: auto; width: 400px; height: 305px;">
+                <img id="{{$index}}"ng-src="{{slide.image}}" ng-click="deleteImage($index)" style="margin: auto; width: 400px; height: 305px;">
                 <div class="carousel-caption">
                     <p>{{slide.desc}}</p>
                 </div>
+                <div>{{slide.image}}</div>
             </div>
         </div>
     </div>

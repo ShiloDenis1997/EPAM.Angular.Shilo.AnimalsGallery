@@ -21,8 +21,8 @@ namespace AnimalsGallery
                 );
             routes.MapRoute(
                 name: "PictureRoutes",
-                url: "Pictures/Picture/{albumName}",
-                defaults: new { controller="Pictures", action="Picture", albumName = "pandaria"}
+                url: "Pictures/Picture/{id}",
+                defaults: new { controller="Pictures", action="Picture", id = 1}
                 );
             routes.MapRoute(
                 name: "Default",

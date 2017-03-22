@@ -10,14 +10,16 @@
 
     function addImage(albumName, image) {
         albums[albumName] = albums[albumName] || [];
-        albums[albumName].push(image);
-        var data = { name: image.desc, data: image.image, albumName: albumName };
-        $http.post('/Pictures/AddImage', data)
-            .then(function (data, status, header, config) {
-                console.log(data);
+
+        var imgData = { name: image.desc, data: image.image, albumName: albumName };
+        $http.post('/Pictures/AddImage', imgData)
+            .then(function (response, status, header, config) {
+                console.log(response);
+                var imgToAdd = { desc: response.data.desc, image: response.data.image, id: response.data.id };
+                albums[albumName].push(imgToAdd);
             },
-                function (data, status, header, config) {
-                    console.log(data);
+                function (response, status, header, config) {
+                    console.log("Failed to post image");
                 });
     };
 

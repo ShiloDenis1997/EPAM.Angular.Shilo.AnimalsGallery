@@ -7,6 +7,7 @@
 
     console.log($scope.albumName);
     $scope.album = imageService.getAlbums();
+    console.log($scope.album);
     $scope.images = imageService.getImages($scope.albumName);
     $scope.id = 0;
 
