@@ -20,11 +20,6 @@ namespace AnimalsGallery
                 defaults: new { controller = "Home", action = "Index" }
                 );
             routes.MapRoute(
-                name: "PictureRoutes",
-                url: "Pictures/Picture/{id}",
-                defaults: new { controller="Pictures", action="Picture", id = 1}
-                );
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

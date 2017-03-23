@@ -5,8 +5,6 @@
             var $ctrl = this;
             $ctrl.id = 0;
             $scope.albumName = "pandas";
-            $ctrl.albums = imageService.getImages;
-            console.log($ctrl.albums);
             $ctrl.items = [];
             $ctrl.active = 0;
             $ctrl.animationsEnabled = true;
@@ -38,10 +36,6 @@
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
                 });
-            };
-
-            $ctrl.toggleAnimation = function () {
-                $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
             };
         }]);
 

@@ -20,7 +20,15 @@ namespace ORM
 
         public bool IsApproved { get; set; }
 
+        public bool IsToSalary { get; set; }
+
+        public decimal Cost { get; set; }
+
+        public int? FormatId { get; set; }
+
         public virtual Album Album { get; set; }
+
+        public virtual ImageFormat ImageFormat { get; set; }
 
         public virtual Picture Picture { get; set; }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using Ninject.Web.Common;
 using ORM;
 
 namespace AnimalsGallery.Infractructure
@@ -31,7 +32,7 @@ namespace AnimalsGallery.Infractructure
 
         private void BindDependencies()
         {
-            kernel.Bind<DbContext>().To<AnimalGallery>();
+            kernel.Bind<DbContext>().To<AnimalGallery>().InRequestScope();
         }
     }
 }

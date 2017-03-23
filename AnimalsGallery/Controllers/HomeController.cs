@@ -14,6 +14,7 @@ namespace AnimalsGallery.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult Gallery()
         {
             return View();

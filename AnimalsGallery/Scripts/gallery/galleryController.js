@@ -6,9 +6,9 @@
     $scope.animalName = "Panda";
 
     console.log($scope.albumName);
-    $scope.album = imageService.getAlbums();
-    console.log($scope.album);
-    $scope.images = imageService.getImages($scope.albumName);
+    $scope.albums = imageService.getAlbums();
+    console.log($scope.albums);
+    //$scope.images = imageService.getImages($scope.albumName);
     $scope.id = 0;
 
     function toDataUrl(src, callback, outputFormat) {
