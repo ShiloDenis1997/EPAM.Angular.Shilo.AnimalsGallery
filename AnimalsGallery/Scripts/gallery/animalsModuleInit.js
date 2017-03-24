@@ -1,1 +1,1 @@
-﻿angular.module('animals', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngRoute']);
+﻿angular.module('animals', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngRoute', 'ngCookies']);

@@ -12,7 +12,7 @@ namespace AnimalsGallery.Providers
         private DbContext context => (DbContext) 
             System.Web.Mvc.DependencyResolver.Current.GetService(typeof(DbContext));
 
-        public MembershipUser CreateUser(string login, string password)
+        public User CreateUser(string login, string password)
         {
             MembershipUser membershipUser = GetUser(login, false);
             
@@ -30,8 +30,7 @@ namespace AnimalsGallery.Providers
 
             context.Set<User>().Add(user);
             context.SaveChanges();
-            membershipUser = GetUser(login, false);
-            return membershipUser;
+            return user;
         }
 
         public override MembershipUser GetUser(string login, bool userIsOnline)

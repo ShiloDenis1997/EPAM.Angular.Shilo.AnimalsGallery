@@ -15,49 +15,52 @@
     <script src="~/Scripts/angular-sanitize.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-cookies.js"></script>
 </head>
 <body>
-<header ng-controller="IndexController" class="animals-header">
-    <h2 class="text-center no-margin" ng-hide="user===undefined">
-        Welcome to the animals gallery, <span ng-bind="user.login"></span>!
-    </h2>
-    <div ng-show="user===undefined">
-        <input type="text" ng-model="login"/>
-        <input type="password" ng-model="password"/>
-        <button ng-click="signIn()">Sign in</button>
-        <button ng-click="register()">Register</button>
-    </div>
-</header>
-<div ng-controller="IndexController" id="nav" data-spy="affix" data-offset-top="{{height}}">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle"
-                        data-toggle="collapse" data-target="#menuNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/Angular/About">Animals gallery</a>
-            </div>
-            <div class="collapse navbar-collapse" id="menuNavbar">
-                <ul class="nav navbar-nav">
-                    <li id="albumsDropdown" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="/Angular/Albums">Albums</a>
-                        <ul class="dropdown-menu">
-                            <li><a id="allAlbumsLink" href="/Angular/Albums">All albums</a></li>
-                            <li><a id="myAlbumsLink"href="/Angular/Gallery">My albums</a></li>
-                        </ul>
-                    </li>
-                    <li><a id="galleryLink" href="/Angular/Gallery">Gallery</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
+<div ng-controller="IndexController">
+    <header class="animals-header">
+        <h2 class="text-center no-margin" ng-hide="user===undefined">
+            Welcome to the animals gallery, <span ng-bind="user.login"></span>!
+        </h2>
+        <div ng-show="user===undefined">
+            <input type="text" ng-model="login" />
+            <input type="password" ng-model="password" />
+            <button ng-click="signIn()">Sign in</button>
+            <button ng-click="register()">Register</button>
         </div>
-    </nav>
+    </header>
+    <div id="nav" data-spy="affix" data-offset-top="{{height}}">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle"
+                            data-toggle="collapse" data-target="#menuNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/Angular/About">Animals gallery</a>
+                </div>
+                <div class="collapse navbar-collapse" id="menuNavbar">
+                    <ul class="nav navbar-nav">
+                        <li id="albumsDropdown" class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="/Angular/Albums">Albums</a>
+                            <ul class="dropdown-menu">
+                                <li><a id="allAlbumsLink" href="/Angular/Albums">All albums</a></li>
+                                <li><a id="myAlbumsLink" href="/Angular/Gallery">My albums</a></li>
+                            </ul>
+                        </li>
+                        <li><a id="galleryLink" href="/Angular/Gallery">Gallery</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>*@
+                        <li ng-hide="user===undefined" ng-click="signOut()"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 </div>
 @RenderBody()
 <script src="~/Scripts/gallery/animalsModuleInit.js"></script>

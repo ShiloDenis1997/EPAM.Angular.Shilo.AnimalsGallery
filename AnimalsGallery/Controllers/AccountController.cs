@@ -27,7 +27,7 @@ namespace AnimalsGallery.Controllers
                 return Json(new { status=false, message="invalid login or password format"});
             }
 
-            MembershipUser user = ((UserMembershipProvider) Membership.Provider)
+            User user = ((UserMembershipProvider) Membership.Provider)
                 .CreateUser(login, password);
 
             if (user == null)
@@ -40,7 +40,7 @@ namespace AnimalsGallery.Controllers
             }
 
             FormsAuthentication.SetAuthCookie(login, false);
-            return Json(new {status = true, rights = "User"});
+            return Json(new {status = true, rights = "User", id = user.Id});
         }
 
         [HttpPost]
@@ -56,10 +56,16 @@ namespace AnimalsGallery.Controllers
                 FormsAuthentication.SetAuthCookie(login, false);
                 User user = context.Set<User>().Include(u => u.Role).First(u => u.Name.Equals(login));
 
-                return Json(new {status = true, rights = user.Role.Rolename});
+                return Json(new {status = true, rights = user.Role.Rolename, id = user.Id});
             }
 
             return Json(new {status = false});
+        }
+
+        public JsonResult SignOut(string login)
+        {
+            FormsAuthentication.SignOut();
+            return Json(new {status = true});
         }
     }
 }
