@@ -33,7 +33,8 @@
 
     $scope.getImage = function () {
         console.log($scope.id);
-        toDataUrl($scope.animalLink, function (result) {
+        toDataUrl($scope.animalLink,
+            function(result) {
                 var image = {
                     image: result,
                     desc: $scope.animalName,
@@ -41,7 +42,9 @@
                 };
                 console.log(image);
                 imageService.addImage($scope.albumName, image);
-            }, function (result) {
+            },
+            function(result) {
+                console.log("cannot load image");
                 console.log(result);
             });
     }
