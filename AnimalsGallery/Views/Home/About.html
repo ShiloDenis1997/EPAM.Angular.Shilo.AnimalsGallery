@@ -1,0 +1,18 @@
+﻿<div class="container-fluid text-center">
+    <h3>Info about us</h3>
+    <div class="row">
+        <div>
+            <div>
+                <br/>
+                <div>
+                    <div ng-hide="edit" ng-bind="siteInfo.text"></div>
+                    <textarea class="about-edit" ng-model="siteInfo.text" ng-show="edit"></textarea>
+                </div>
+                <div>
+                    <button ng-show="isAuthorized([userRoles.admin, userRoles.moderator])" 
+                            ng-click="toggleEdit(siteInfo)">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
-<div class="modal-demo">
+﻿<div class="modal-demo">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">Album
@@ -10,10 +6,10 @@
             </h3>
         </div>
         <div class="modal-body" id="modal-body">
-            <div style="height: 305px">
+            <div>
                 <div uib-carousel active="$ctrl.active">
                     <div uib-slide ng-repeat="slide in $ctrl.items" index="$index">
-                        <img ng-src="{{slide.image}}" ng-click="$ctrl.deleteImage($index)" style="margin:auto;width:400px; height:305px;">
+                        <img ng-src="{{slide.image}}" ng-click="$ctrl.deleteImage($index)" class="slider-image">
                         <div class="carousel-caption">
                             <p>{{slide.desc}}</p>
                         </div>
@@ -21,13 +17,9 @@
                 </div>
             </div>
         </div>
-        @*<div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>*@
     </script>
     <div>
         <input type="text" ng-model="albumName" />
-        <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Open me!</button>
     </div>
 </div>

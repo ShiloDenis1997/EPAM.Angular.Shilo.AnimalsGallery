@@ -35,7 +35,7 @@ namespace AnimalsGallery.Controllers
                 return Json(new
                 {
                     status = false,
-                    message = "invalid login or password format"
+                    message = "user already exists"
                 });
             }
 
@@ -59,10 +59,10 @@ namespace AnimalsGallery.Controllers
                 return Json(new {status = true, rights = user.Role.Rolename, id = user.Id});
             }
 
-            return Json(new {status = false});
+            return Json(new {status = false, message = "invalid login or password"});
         }
 
-        public JsonResult SignOut(string login)
+        public JsonResult SignOut()
         {
             FormsAuthentication.SignOut();
             return Json(new {status = true});

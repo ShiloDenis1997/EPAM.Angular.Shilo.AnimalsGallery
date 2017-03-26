@@ -1,0 +1,1 @@
+﻿angular.module('gallery', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngRoute', 'ngCookies']);

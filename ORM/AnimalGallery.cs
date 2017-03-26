@@ -18,6 +18,7 @@ namespace ORM
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Term> Terms { get; set; }
+        public virtual DbSet<TextPart> TextParts { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,8 +30,9 @@ namespace ORM
 
             modelBuilder.Entity<ImageFormat>()
                 .HasMany(e => e.Images)
-                .WithOptional(e => e.ImageFormat)
-                .HasForeignKey(e => e.FormatId);
+                .WithRequired(e => e.ImageFormat)
+                .HasForeignKey(e => e.FormatId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Image>()
                 .Property(e => e.Cost)

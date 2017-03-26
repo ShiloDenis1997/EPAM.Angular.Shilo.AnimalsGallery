@@ -1,4 +1,4 @@
-﻿angular.module('animals').controller('ModalDemoCtrl',
+﻿angular.module('gallery').controller('ModalDemoCtrl',
     ['$uibModal', '$log', '$document', '$scope', 'imageService',
         function ($uibModal, $log, $document, $scope, imageService) {
             console.log("modal window");
@@ -19,6 +19,7 @@
                     templateUrl: 'myModalContent.html',
                     controller: 'ModalInstanceCtrl',
                     controllerAs: '$ctrl',
+                    windowClass: 'modal-fullscreen',
                     size: size,
                     appendTo: parentElem,
                     resolve: {
@@ -42,7 +43,7 @@
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-angular.module('animals').controller('ModalInstanceCtrl', ['$uibModalInstance', 'imageService', 'items', 'albumName', function ($uibModalInstance, imageService, items, albumName) {
+angular.module('gallery').controller('ModalInstanceCtrl', ['$uibModalInstance', 'imageService', 'items', 'albumName', function ($uibModalInstance, imageService, items, albumName) {
     var $ctrl = this;
     $ctrl.items = items;
     console.log(items);

@@ -24,7 +24,9 @@ namespace ORM
 
         public decimal Cost { get; set; }
 
-        public int? FormatId { get; set; }
+        public int FormatId { get; set; }
+
+        public DateTime CreationDate { get; set; }
 
         public virtual Album Album { get; set; }
 

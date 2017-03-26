@@ -1,0 +1,32 @@
+﻿<div>
+    <div>
+        <input id="imageLinkInput" type="text" ng-model="imageLink" name="urlPicture" />
+        <input id="imageNameInput" type="text" ng-model="imageName" name="imageName" />
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" ng-click="getImage()">Add image</button>
+            </div>
+            <input type='file' name="upload" id="upload_hidden"
+                   style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;" ng-model-instant onchange="angular.element(this).scope().imageUpload(event)"/>
+            <button onclick="document.getElementById('upload_hidden').click();">Browse</button>
+        </div>
+    </div>
+    <div>
+        <input type="text" ng-model="albumName" />
+    </div>
+    <div class="container">
+        <div class="landscape col-xs-12 col-sm-6 col-md-4 col-lg-3 img-container" ng-repeat="image in albums[albumName].images" index="$index">
+            <img id="{{$index}}" ng-src="{{image.image}}"/>
+        </div>
+    </div>
+    <!--<div style="height: 305px">
+        <div uib-carousel active="active">
+            <div uib-slide ng-repeat="slide in albums[albumName].images" index="$index">
+                <img id="{{$index}}"ng-src="{{slide.image}}" ng-click="deleteImage($index)" style="margin: auto; width: 400px; height: 305px;">
+                <div class="carousel-caption">
+                    <p>{{slide.desc}}</p>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>

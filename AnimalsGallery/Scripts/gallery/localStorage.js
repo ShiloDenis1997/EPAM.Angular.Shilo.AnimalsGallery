@@ -1,4 +1,4 @@
-﻿angular.module('animals')
+﻿angular.module('gallery')
     .service('localStorage',
         function() {
             var storage = [];

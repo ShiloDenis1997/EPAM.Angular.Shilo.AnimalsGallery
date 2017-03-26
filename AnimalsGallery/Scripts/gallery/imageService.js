@@ -1,8 +1,12 @@
-﻿angular.module('animals').service('imageService', ['$http', function ($http) {
+﻿angular.module('gallery').service('imageService', ['$http', function ($http) {
     var albums = [];
     $http.get('/Pictures/GetAllAlbums')
-        .then(function(response) {
-                albums = response.data;
+        .then(function (response) {
+                console.log('keys');
+                Object.keys(response.data).forEach(function(key) {
+                    albums[key] = response.data[key];
+                });
+                //albums = response.data;
             },
             function(response) {
                 console.log("Cannot load albums");
@@ -26,7 +30,7 @@
             .then(function (response, status, header, config) {
                 console.log(response);
                 var imgToAdd = { desc: response.data.desc, image: response.data.image, id: response.data.id };
-                albums[albumName].push(imgToAdd);
+                albums[albumName].images.push(imgToAdd);
             },
                 function (response, status, header, config) {
                     console.log("Failed to post image");
@@ -39,7 +43,7 @@
         $http.post('/Pictures/CreateAlbum', { albumName: albumName, userId: userId })
             .then(function (response, status, header, config) {
                     if (response.data.status) {
-                        albums[albumName] = [];
+                        albums[albumName] = { images: [], rating: 0, userId: userId };
                         console.log("album created");
                     } else {
                         console.log("cannot create album");
@@ -55,15 +59,15 @@
         if (albums[albumName] === undefined)
             return false;
 
-        var imageToRemove = albums[albumName][0];
+        var imageToRemove = albums[albumName].images[index];
         if (imageToRemove == undefined)
             return false;
-
-        $http.post('/Pictures/RemoveImage', imageToRemove.id)
+        console.log(imageToRemove);
+        $http.post('/Pictures/RemoveImage', { id: imageToRemove.id })
             .then(function(response, status, header, config) {
                     console.log(response);
                     if (response.data.status) {
-                        albums[albumName].splice(index, 1);
+                        albums[albumName].images.splice(index, 1);
                         console.log("removed");
                     } else
                         console.log("cannot remove image");
@@ -76,7 +80,7 @@
     }
 
     function getImages(albumName) {
-        return albums[albumName];
+        return albums[albumName].images;
     }
 
     function getAlbums() {

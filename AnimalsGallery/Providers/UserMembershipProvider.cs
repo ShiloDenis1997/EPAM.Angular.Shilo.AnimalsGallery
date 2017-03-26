@@ -48,7 +48,7 @@ namespace AnimalsGallery.Providers
         public override bool ValidateUser(string login, string password)
         {
             User user = 
-                context.Set<User>().First(u => u.Name.Equals(login));
+                context.Set<User>().FirstOrDefault(u => u.Name.Equals(login));
                                 
             if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
             {

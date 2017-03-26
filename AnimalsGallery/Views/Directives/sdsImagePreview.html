@@ -1,0 +1,19 @@
+﻿<div>
+    <div>
+        <input id="imageLinkInput" type="text" ng-model="imageLink" name="urlPicture"/>
+        <input id="imageNameInput" type="text" ng-model="imageName" name="imageName"/>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" ng-click="getImage()">{{addButtonText}}</button>
+            </div>
+            <input type='file' name="upload" id="upload_hidden"
+                   style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+                   ng-model-instant onchange="angular.element(this).scope().imageUpload(event)"/>
+            <button onclick="document.getElementById('upload_hidden').click();">{{fileButtonText}}</button>
+        </div>
+    </div>
+    <div>
+        <input type="text" ng-model="albumName"/>
+    </div>
+    <img ng-src="{{imageLink}}" />
+</div>

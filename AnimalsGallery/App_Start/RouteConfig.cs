@@ -20,6 +20,10 @@ namespace AnimalsGallery
                 defaults: new { controller = "Home", action = "Index" }
                 );
             routes.MapRoute(
+                name: "TextPartsRoute",
+                url: "TextParts/GetTextPart/{name}",
+                defaults: new {controller = "TextParts", action = "GetTextPart", name = UrlParameter.Optional});
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

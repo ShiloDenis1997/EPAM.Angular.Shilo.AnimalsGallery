@@ -11,13 +11,12 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select{
     max-width: 280px;
 }
 
 .about-edit {
-    width: 283px;
+    width: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     min-height: 150px;
@@ -34,7 +33,7 @@ textarea {
     padding-top: 70px;
 }
 
-.animals-header {
+.gallery-header {
     padding-top: 30px; 
     padding-bottom: 30px;
     background: #c6cbd0;
@@ -86,4 +85,30 @@ textarea {
     border-right: 6px solid #fff;
     border-bottom: 6px solid transparent;
     left: 10px;
+}
+
+.img-container {
+    height: 240px;
+    width: 300px;
+    background-color: #eef0f3;
+    padding: 15px;
+}
+
+.landscape img {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+.modal-fullscreen .modal-dialog{
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.slider-image {
+    margin:auto;
+    /*height: 100%;
+    width: 100%;*/
 }

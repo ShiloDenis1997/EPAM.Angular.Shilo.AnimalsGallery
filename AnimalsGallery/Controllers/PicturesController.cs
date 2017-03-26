@@ -27,7 +27,7 @@ namespace AnimalsGallery.Controllers
         [HttpGet]
         public JsonResult GetAllAlbums()
         {
-            Dictionary<string, List<object>> albums = new Dictionary<string, List<object>>();
+            var albums = new Dictionary<string, Dictionary<string, object>>();
             IEnumerable<Album> albumsList = context.Set<Album>().Include(a => a.Images).ToList();
             foreach (Album album in albumsList)
             {
@@ -41,7 +41,13 @@ namespace AnimalsGallery.Controllers
                         id = image.Id
                     });
                 }
-                albums.Add(album.Name, imagesList);
+                var albumToAdd = new Dictionary<string, object>
+                {
+                    {"images", imagesList},
+                    {"rating", album.Rating},
+                    {"userId", album.UserId}
+                };
+                albums.Add(album.Name, albumToAdd);
             }
             return Json(albums, JsonRequestBehavior.AllowGet);
         }
@@ -106,18 +112,13 @@ namespace AnimalsGallery.Controllers
                 Name = name,
                 IsApproved = false,
                 PictureId = picture.Id,
-                AlbumId = album.Id
+                AlbumId = album.Id,
+                CreationDate = DateTime.Now,
+                FormatId = 1
             };
 
             image = context.Set<Image>().Add(image);
-            try
-            {
-                context.SaveChanges();
-            }
-            catch
-            {
-                return Json(new {status = false});
-            }
+            context.SaveChanges();
 
             return Json(new
             {
