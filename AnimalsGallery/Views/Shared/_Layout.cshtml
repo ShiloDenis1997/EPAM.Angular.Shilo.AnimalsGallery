@@ -69,22 +69,22 @@
         </div>
     </div>
 
-<div ng-show="currentUser">Welcome, {{ currentUser.login }} {{currentUser.role}}</div>
 <div ng-show="isAuthorized(userRoles.admin)">You're admin.</div>
 <div ng-show="isAuthorized(userRoles.moderator)">You're moderator.</div>
 <div ng-show="isAuthorized(userRoles.user)">You're user</div>
 @RenderBody()
 <script src="~/Scripts/gallery/galleryModuleInit.js"></script>
+<script src="~/Scripts/gallery/indexController.js"></script>
 <script src="~/Scripts/gallery/imageService.js"></script>
 <script src="~/Scripts/gallery/textPartsService.js"></script>
 <script src="~/Scripts/gallery/accountServices.js"></script>
 <script src="~/Scripts/gallery/imagePreviewDirective.js"></script>
 <script src="~/Scripts/gallery/localStorage.js"></script>
-<script src="~/Scripts/gallery/indexController.js"></script>
 <script src="~/Scripts/gallery/addImageController.js"></script>
 <script src="~/Scripts/gallery/aboutController.js"></script>
 <script src="~/Scripts/gallery/modalGallery.js"></script>
 <script src="~/Scripts/gallery/galleryViewController.js"></script>
 <script src="~/Scripts/gallery/galleryModuleConfigurator.js"></script>
+<script src="~/Scripts/gallery/imageLoadDirective.js"></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+﻿<div class="row">
+    <div class="col-xs-6">
+        <button type="button" class="btn btn-info" ng-click="getImage()">Add by url</button>
+        <button type="button" class="btn btn-info" onclick="document.getElementById('upload_hidden').click();">Add from file</button>
+    </div>
+    <input type='file' name="upload" id="upload_hidden"
+           style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+           ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" />
+</div>

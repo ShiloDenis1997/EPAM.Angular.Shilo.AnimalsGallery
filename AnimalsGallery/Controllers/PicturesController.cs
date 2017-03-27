@@ -38,6 +38,7 @@ namespace AnimalsGallery.Controllers
                     {
                         image = $"{picturePrefix}/{image.PictureId}",
                         desc = image.Name,
+                        format = image.ImageFormat.Format,
                         id = image.Id
                     });
                 }
