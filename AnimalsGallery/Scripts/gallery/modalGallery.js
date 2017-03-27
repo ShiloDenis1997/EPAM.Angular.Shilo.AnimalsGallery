@@ -40,8 +40,6 @@
             };
         }]);
 
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
 
 angular.module('gallery').controller('ModalInstanceCtrl', ['$uibModalInstance', 'imageService', 'items', 'albumName', function ($uibModalInstance, imageService, items, albumName) {
     var $ctrl = this;

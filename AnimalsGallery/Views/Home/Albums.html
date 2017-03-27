@@ -9,7 +9,7 @@
             <div>
                 <div uib-carousel active="$ctrl.active">
                     <div uib-slide ng-repeat="slide in $ctrl.items" index="$index">
-                        <img ng-src="{{slide.image}}" ng-click="$ctrl.deleteImage($index)" class="slider-image">
+                        <img ng-src="{{slide.image}}" ng-click="$ctrl.deleteImage($index)" class="img-responsive">
                         <div class="carousel-caption">
                             <p>{{slide.desc}}</p>
                         </div>

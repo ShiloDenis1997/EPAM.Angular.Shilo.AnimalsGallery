@@ -39,7 +39,8 @@ namespace AnimalsGallery.Controllers
                         image = $"{picturePrefix}/{image.PictureId}",
                         desc = image.Name,
                         format = image.ImageFormat.Format,
-                        id = image.Id
+                        id = image.Id,
+                        date = image.CreationDate.ToString()
                     });
                 }
                 var albumToAdd = new Dictionary<string, object>
@@ -62,14 +63,14 @@ namespace AnimalsGallery.Controllers
                 return null;
             try
             {
-                Album album = new Album {Name = albumName};
+                Album album = new Album { Name = albumName };
                 user.Albums.Add(album);
                 context.SaveChanges();
-                return Json(new {status = true});
+                return Json(new { status = true });
             }
             catch
             {
-                return Json(new {status = false});
+                return Json(new { status = false });
             }
         }
 
@@ -79,7 +80,7 @@ namespace AnimalsGallery.Controllers
             Image image = context.Set<Image>().Find(id);
             if (image == null)
             {
-                return Json(new {status = true});
+                return Json(new { status = true });
             }
 
             Picture picture = image.Picture;
@@ -90,12 +91,32 @@ namespace AnimalsGallery.Controllers
                 if (picture.Images.Count == 1)
                     context.Set<Picture>().Remove(picture);
                 context.SaveChanges();
-                return Json(new {status = true});
+                return Json(new { status = true });
             }
             catch
             {
-                return Json(new {status = false});
+                return Json(new { status = false });
             }
+        }
+
+        [HttpGet]
+        public JsonResult GetAllFormats()
+        {
+            var imageFormats = context.Set<ImageFormat>().Select(f => f.Format).ToList();
+            return Json(imageFormats, JsonRequestBehavior.AllowGet);
+        }
+
+        private ImageFormat GetImageFormat(string format)
+        {
+            ImageFormat imageFormat = context.Set<ImageFormat>().FirstOrDefault(f => f.Format.Equals(format));
+            if (imageFormat != null)
+            {
+                return imageFormat;
+            }
+
+            imageFormat = context.Set<ImageFormat>().Add(new ImageFormat { Format = format });
+            context.SaveChanges();
+            return imageFormat;
         }
 
         [HttpPost]
@@ -105,8 +126,11 @@ namespace AnimalsGallery.Controllers
             if (album == null)
                 return Json(new { status = false });
             string[] dataSegments = data.Split(',');
+            string format = dataSegments[0].Split('/', ';')[1];
 
-            Picture picture = new Picture {PictureData = Convert.FromBase64String(dataSegments[1])};
+            ImageFormat imageFormat = GetImageFormat(format);
+
+            Picture picture = new Picture { PictureData = Convert.FromBase64String(dataSegments[1]) };
             picture = context.Set<Picture>().Add(picture);
             Image image = new Image
             {
@@ -115,7 +139,7 @@ namespace AnimalsGallery.Controllers
                 PictureId = picture.Id,
                 AlbumId = album.Id,
                 CreationDate = DateTime.Now,
-                FormatId = 1
+                ImageFormat = imageFormat
             };
 
             image = context.Set<Image>().Add(image);
@@ -126,9 +150,13 @@ namespace AnimalsGallery.Controllers
                 status = true,
                 image = $"{picturePrefix}/{image.PictureId}",
                 desc = image.Name,
-                id = image.Id
+                id = image.Id,
+                date = image.CreationDate.ToString(),
+                format = imageFormat.Format
             });
         }
+
+
 
         // GET: Pictures
         public void Picture(int id)

@@ -4,10 +4,17 @@
         function ($locationProvider, $routeProvider, USER_ROLES) {
             console.log("hello from config");
             $routeProvider
-                .when('/Angular/Gallery',
+                .when('/Angular/Gallery/:album',
                 {
                     templateUrl: 'Views/Home/Gallery.html',
                     controller: 'GalleryController',
+                    data: {
+                        authorizedRoles: [USER_ROLES.all]
+                    }
+                })
+                .when('/Angular/Gallery',
+                {
+                    redirectTo: '/Angular/Gallery/all',
                     data: {
                         authorizedRoles: [USER_ROLES.all]
                     }
@@ -58,32 +65,32 @@
             }
         });
     });
-    //.config(function($httpProvider) {
-    //    $httpProvider.interceptors.push([
-    //        '$injector',
-    //        function($injector) {
-    //            return $injector.get('AuthInterceptor');
-    //        }
-    //    ]);
-    //})
-    //.factory('AuthInterceptor', function ($rootScope, $q,
-    //                                      AUTH_EVENTS) {
-    //    return {
-    //        responseError: function (response) {
-    //            console.log('Intercept');
-    //            if (response.status === 401) {
-    //                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated,
-    //                                      response);
-    //            }
-    //            if (response.status === 403) {
-    //                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized,
-    //                                      response);
-    //            }
-    //            if (response.status === 419 || response.status === 440) {
-    //                $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout,
-    //                                      response);
-    //            }
-    //            return $q.reject(response);
-    //        }
-    //    };
-    //});
+//.config(function($httpProvider) {
+//    $httpProvider.interceptors.push([
+//        '$injector',
+//        function($injector) {
+//            return $injector.get('AuthInterceptor');
+//        }
+//    ]);
+//})
+//.factory('AuthInterceptor', function ($rootScope, $q,
+//                                      AUTH_EVENTS) {
+//    return {
+//        responseError: function (response) {
+//            console.log('Intercept');
+//            if (response.status === 401) {
+//                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated,
+//                                      response);
+//            }
+//            if (response.status === 403) {
+//                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized,
+//                                      response);
+//            }
+//            if (response.status === 419 || response.status === 440) {
+//                $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout,
+//                                      response);
+//            }
+//            return $q.reject(response);
+//        }
+//    };
+//});

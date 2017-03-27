@@ -13,8 +13,7 @@ namespace ORM
         {
             Images = new HashSet<Image>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int Id { get; set; }
 
         [Required]

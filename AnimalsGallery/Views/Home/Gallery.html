@@ -1,33 +1,34 @@
 ﻿<div>
     <div>
-        <input id="imageLinkInput" type="text" ng-model="imageLink" name="urlPicture" />
-        <input id="imageNameInput" type="text" ng-model="imageName" name="imageName" />
-    </div>
-    <div>
-        <input type="text" ng-model="albumName" />
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" ng-click="getImage()">Add by url</button>
-            <button type="button" class="btn btn-info" onclick="document.getElementById('upload_hidden').click();">Add from file</button>
+        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+            <button id="btn-append-to-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                Current album: {{selectedAlbum}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+                <li ng-repeat="name in albumNames" role="menuitem"><a href="/Angular/Gallery/{{name}}">{{name}}</a></li>
+            </ul>
         </div>
-        <input type='file' name="upload" id="upload_hidden"
-               style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
-               ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" />
-    </div>
-    <div class="container">
-        <div class="landscape col-xs-12 col-sm-6 col-md-4 col-lg-3 img-container" ng-repeat="image in albums[albumName].images" index="$index">
-            <img id="{{$index}}" ng-src="{{image.image}}"/>
+        <div ng-show="isAuthenticated()">
+            <input class="form-control" type="text" ng-model="state.newAlbumName" />
+            <button class="btn btn-primary" ng-click="createAlbum(state.newAlbumName)">Create album</button>
         </div>
     </div>
-    <!--<div style="height: 305px">
-        <div uib-carousel active="active">
-            <div uib-slide ng-repeat="slide in albums[albumName].images" index="$index">
-                <img id="{{$index}}"ng-src="{{slide.image}}" ng-click="deleteImage($index)" style="margin: auto; width: 400px; height: 305px;">
-                <div class="carousel-caption">
-                    <p>{{slide.desc}}</p>
+    <div ng-repeat="format in formats">
+        <label>
+            {{format}}
+        </label><input type="checkbox" ng-model="state.formatsFilter[format]" />
+    </div>
+    <div class="container-fluid">
+        <div ng-repeat="albumName in getAlbums(selectedAlbum)">
+            <div class="landscape col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="image in albums[albumName].images | byformat:state.formatsFilter" index="$index">
+                <div class="text-center" ng-bind="image.desc"></div>
+                {{$index}}
+                <span class="glyphicon glyphicon-trash" ng-click="deleteImage(image, albumName)"></span>
+                <img class="thumbnail" style="height:250px; margin-bottom:0" id="{{$index}}" ng-src="{{image.image}}" />
+                <div class="text-center thumbnail">
+                    Posted at {{image.date}}
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 </div>
