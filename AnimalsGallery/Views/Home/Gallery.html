@@ -20,11 +20,11 @@
     </div>
     <div class="container-fluid">
         <div ng-repeat="albumName in getAlbums(selectedAlbum)">
-            <div class="landscape col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="image in albums[albumName].images | byformat:state.formatsFilter" index="$index">
+            <div id="{{albumName + $index}}"ng-class="getCurrentClass(albumName + $index)" ng-repeat="image in albums[albumName].images | byformat:state.formatsFilter" index="$index">
                 <div class="text-center" ng-bind="image.desc"></div>
                 {{$index}}
                 <span ng-show="albums[albumName].userId === currentUser.userId" class="glyphicon glyphicon-trash" ng-click="deleteImage(image, albumName)"></span>
-                <img class="thumbnail" style="height:250px; margin-bottom:0" id="{{$index}}" ng-src="{{image.image}}" />
+                <img id="{{albumName + $index}}img" ng-click="toggleImage(albumName + $index)"class="thumbnail" ng-style="getCurrentStyle(albumName + $index)" ng-src="{{image.image}}" />
                 <div class="text-center thumbnail">
                     Posted at {{image.date}}
                 </div>
