@@ -1,5 +1,6 @@
 ﻿angular.module('gallery').controller('GalleryController',
-['$scope', '$route', 'imageService', 'galleryState', function ($scope, $route, imageService, galleryState) {
+['$scope', '$route', 'imageService', 'galleryState', 'IMGSERVICE_EVENTS',
+    function ($scope, $route, imageService, galleryState, IMGSERVICE_EVENTS) {
     console.log('controller loaded');
     $scope.newAlbumName = '';
     $scope.albums = imageService.getAlbums();
@@ -11,18 +12,11 @@
     $scope.formats = imageService.getFormats();
     $scope.formatsfilter = [];
     $scope.state = galleryState.getState();
-    
-    $scope.$watch('formats', function (oldFormats, newFormats) {
-        var i;
-        var keys = Object.keys($scope.state.formatsFilter);
-        for (i = 0; i < newFormats.length; i++)
-        {
-            console.log('before changing');
-            console.log(newFormats[i]);
-            console.log($scope.state.formatsFilter);
-            if (keys.indexOf(newFormats[i]) === -1)
-                $scope.state.formatsFilter[newFormats[i]] = true;
-        }
+    console.log($scope.formats);
+
+    $scope.$on(IMGSERVICE_EVENTS.newFormatAdded, function (event, args) {
+        console.log(args);
+        $scope.state.formatsFilter[args] = true;
     });
 
     $scope.getAlbums = function (selectedAlbum) {
