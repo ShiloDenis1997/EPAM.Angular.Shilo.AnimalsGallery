@@ -144,6 +144,12 @@
                     $scope.currentUser.role = Session.role;
                     $scope.currentUser.userId = Session.userId;
                 });
+            $scope.$on(AUTH_EVENTS.logoutSuccess,
+                function (event, args) {
+                    $scope.currentUser.login = Session.login;
+                    $scope.currentUser.role = Session.role;
+                    $scope.currentUser.userId = Session.userId;
+                });
         })
     .controller('LoginController',
         function ($scope, $rootScope, AUTH_EVENTS, AuthService) {
