@@ -40,7 +40,7 @@
                         templateUrl: 'Views/Home/AddImage.html',
                         controller: 'AddImageController',
                         data: {
-                            authorizedRoles: [USER_ROLES.all]
+                            authorizedRoles: [USER_ROLES.user, USER_ROLES.admin, USER_ROLES.moderator]
                         }
                     }
                 )
@@ -65,32 +65,3 @@
             }
         });
     });
-//.config(function($httpProvider) {
-//    $httpProvider.interceptors.push([
-//        '$injector',
-//        function($injector) {
-//            return $injector.get('AuthInterceptor');
-//        }
-//    ]);
-//})
-//.factory('AuthInterceptor', function ($rootScope, $q,
-//                                      AUTH_EVENTS) {
-//    return {
-//        responseError: function (response) {
-//            console.log('Intercept');
-//            if (response.status === 401) {
-//                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated,
-//                                      response);
-//            }
-//            if (response.status === 403) {
-//                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized,
-//                                      response);
-//            }
-//            if (response.status === 419 || response.status === 440) {
-//                $rootScope.$broadcast(AUTH_EVENTS.sessionTimeout,
-//                                      response);
-//            }
-//            return $q.reject(response);
-//        }
-//    };
-//});

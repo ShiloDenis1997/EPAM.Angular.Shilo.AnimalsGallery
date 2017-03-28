@@ -19,6 +19,18 @@
         $scope.state.formatsFilter[args] = true;
     });
 
+    $scope.$watch('formats', function (oldFormats, newFormats) {
+        var i;
+        var keys = Object.keys($scope.state.formatsFilter);
+        for (i = 0; i < newFormats.length; i++) {
+            console.log('before changing');
+            console.log(newFormats[i]);
+            console.log($scope.state.formatsFilter);
+            if (keys.indexOf(newFormats[i]) === -1)
+                $scope.state.formatsFilter[newFormats[i]] = true;
+        }
+    });
+
     $scope.getAlbums = function (selectedAlbum) {
         if (selectedAlbum == 'all') {
             return $scope.albumNames;
@@ -63,7 +75,6 @@ angular.module('gallery').filter('byformat', function () {
             formats: formats,
             out: []
         };
-        //console.log(items);
         angular.forEach(images, function (value, key) {
             if (this.formats[value.format] === true) {
                 this.out.push(value);

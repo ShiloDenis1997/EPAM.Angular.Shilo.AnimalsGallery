@@ -57,7 +57,7 @@
                                 </ul>
                             </li>
                             <li><a id="galleryLink" href="/Angular/Gallery">Gallery</a></li>
-                            <li><a id="addImageLink" href="/Angular/AddImage">Add image</a></li>
+                            <li ng-show="isAuthenticated()"><a id="addImageLink" href="/Angular/AddImage">Add image</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>*@

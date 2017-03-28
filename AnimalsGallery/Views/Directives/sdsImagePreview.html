@@ -1,18 +1,23 @@
 ﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4">
             <div class="form-group">
                 <label class="control-label">Image url</label>
                 <input class="form-control" id="imageLinkInput" type="text" ng-model="imageLink" name="urlPicture" />
                 <label class="control-label">Image name</label>
                 <input class="form-control" id="imageNameInput" type="text" ng-model="imageName" name="imageName" />
-                <label class="control-label">Album name</label>
-                <input class="form-control" type="text" ng-model="albumName" />
+                
+                <div class="btn-group control-label" uib-dropdown dropdown-append-to-body>
+                    <button id="btn-append-to-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                        Album: {{albumName}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+                        <li ng-repeat="name in albumNames |filter:albumMatch()" role="menuitem" ng-click="selectAlbum(name)"><a href="#">{{name}}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="col-xs-8 preview-container">
+        <div class="col-xs-12 col-sm-8 preview-container">
             <div class="text-center" ng-bind="imageName"></div>
             <div class="img-container col-xs-12"><img ng-show="isShowed" sds-on-load="imageLoaded()" sds-on-error="imageError()" class="slider-image" ng-src="{{imageLink}}" /></div>
         </div>
-    </div>
 </div>

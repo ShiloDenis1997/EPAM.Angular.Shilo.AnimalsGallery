@@ -1,12 +1,20 @@
 ﻿angular.module('gallery')
     .directive('sdsImagePreview',
-        function () {
+        function (imageService, Session) {
             function link(scope, element, attrs) {
                 console.log('hello from directive');
 
+                scope.albumNames = imageService.getAlbumNames();
+                scope.albums = imageService.getAlbums();
+                scope.selectedAlbum = '';
                 scope.isShowed = false;
-                scope.toggle = function () {
-                    scope.isShowed = !scope.isShowed;
+                console.log('albumNames');
+                console.log(scope.albumNames);
+                console.log('albums');
+                console.log(scope.albums);
+
+                scope.selectAlbum = function(name) {
+                    scope.albumName = name;
                 }
 
                 scope.imageError = function () {
@@ -15,8 +23,22 @@
                 }
 
                 scope.imageLoaded = function () {
+                    console.log(scope.albums);
                     console.log('loaded');
                     scope.isShowed = true;
+                }
+
+                scope.albumMatch = function (criteria) {
+                    return function (albumName) {
+                        if (albumName === 'all')
+                            return false;
+                        if (scope.albums[albumName] === undefined)
+                            return false;
+                        if (scope.albums[albumName].userId !== +Session.userId)
+                            return false;
+                        return true;
+                    }
+                    
                 }
             }
             return {

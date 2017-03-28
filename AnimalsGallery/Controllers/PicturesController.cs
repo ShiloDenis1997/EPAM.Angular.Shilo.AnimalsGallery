@@ -47,7 +47,8 @@ namespace AnimalsGallery.Controllers
                 {
                     {"images", imagesList},
                     {"rating", album.Rating},
-                    {"userId", album.UserId}
+                    {"userId", album.UserId},
+                    {"name", album.Name }
                 };
                 albums.Add(album.Name, albumToAdd);
             }
