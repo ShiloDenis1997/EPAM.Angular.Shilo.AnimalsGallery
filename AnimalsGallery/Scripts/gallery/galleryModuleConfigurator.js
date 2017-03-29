@@ -50,6 +50,8 @@
     ])
     .run(function ($rootScope, AUTH_EVENTS, AuthService, USER_ROLES) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
+            console.log('event');
+            console.log(event);
             var authorizedRoles = next.data.authorizedRoles;
             if (!AuthService.isAuthorized(authorizedRoles) && !(authorizedRoles.indexOf(USER_ROLES.all) !== -1)) {
                 event.preventDefault();

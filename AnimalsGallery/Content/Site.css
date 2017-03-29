@@ -98,6 +98,10 @@ select {
     background-color: #eef0f3;
 }
 
+.centered{
+    margin-left:40%;
+}
+
 .preview-container {
     max-width: 306px;
     max-height: 268px;
@@ -126,14 +130,6 @@ select {
 
 .img-container {
     height: 100%;
-}
-
-.fit {
-    padding: 0;
-    display: block;
-    margin: 0 auto;
-    max-height: 100%;
-    max-width: 100%;
 }
 
 html, body {

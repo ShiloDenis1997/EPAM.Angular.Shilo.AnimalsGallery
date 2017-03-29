@@ -1,6 +1,6 @@
 ﻿angular.module('gallery').controller('GalleryController',
-['$scope', '$route', 'imageService', 'galleryState', 'IMGSERVICE_EVENTS',
-    function ($scope, $route, imageService, galleryState, IMGSERVICE_EVENTS) {
+['$scope', '$route', '$filter', 'imageService', 'galleryState', 'IMGSERVICE_EVENTS', 'IMGSERVICE_CONSTANTS',
+function ($scope, $route, $filter, imageService, galleryState, IMGSERVICE_EVENTS, IMGSERVICE_CONSTANTS) {
         console.log('controller loaded');
         $scope.newAlbumName = '';
         $scope.albums = imageService.getAlbums();
@@ -13,6 +13,10 @@
         $scope.formatsfilter = [];
         $scope.state = galleryState.getState();
         console.log($scope.formats);
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
+        $scope.pageSizes = [5, 10, 15, 20, 25, 30];
+        console.log($scope.pageSizes);
 
         $scope.$on(IMGSERVICE_EVENTS.newFormatAdded, function (event, args) {
             console.log(args);
@@ -30,12 +34,21 @@
                     $scope.state.formatsFilter[newFormats[i]] = true;
             }
         });
-
-        $scope.getAlbums = function (selectedAlbum) {
-            if (selectedAlbum == 'all') {
-                return $scope.albumNames;
+        
+        $scope.getData = function () {
+            if ($scope.albums[$scope.selectedAlbum]) {
+                return $filter('byformat')($scope.albums[$scope.selectedAlbum].images, $scope.state.formatsFilter);
+                //return $scope.albums[$scope.selectedAlbum].images;
             }
-            return [selectedAlbum];
+            return [];
+        }
+
+        $scope.setPageSize = function (size) {
+            $scope.pageSize = size;
+        }
+
+        $scope.numberOfPages = function () {
+            return Math.ceil($scope.getData().length / $scope.pageSize);
         }
 
         $scope.deleteImage = function (image, albumName) {
@@ -47,6 +60,13 @@
         $scope.createAlbum = function (albumName) {
             imageService.createAlbum(albumName, $scope.currentUser.userId);
             $scope.state.newAlbumName = '';
+        }
+
+        $scope.showTrashIcon = function (userId)
+        {
+            if ($scope.selectedAlbum === IMGSERVICE_CONSTANTS.all)
+                return false;
+            return $scope.albums[$scope.selectedAlbum].userId == $scope.currentUser.userId;
         }
 
         $scope.currentImgId = '';
@@ -103,6 +123,12 @@ angular.module('gallery').service('galleryState', function () {
     };
 });
 
+angular.module('gallery').filter('startFrom', function () {
+    return function (input, start) {
+        start = +start;
+        return input.slice(start);
+    }
+});
 
 angular.module('gallery').filter('byformat', function () {
     return function (images, formats) {

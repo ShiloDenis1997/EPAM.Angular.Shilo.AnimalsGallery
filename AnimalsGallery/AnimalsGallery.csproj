@@ -186,6 +186,7 @@
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\gallery\localStorage.js" />
     <Content Include="Scripts\gallery\modalGallery.js" />
+    <Content Include="Scripts\gallery\paginationDirective.js" />
     <Content Include="Scripts\gallery\textPartsService.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -193,6 +194,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Directives\sdsImageLoad.html" />
+    <Content Include="Views\Directives\sdsPaginationDirective.html" />
     <Content Include="Views\Home\AddImage.html" />
     <Content Include="Views\Directives\sdsImagePreview.html" />
     <Content Include="Web.config" />

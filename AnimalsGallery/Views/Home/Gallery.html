@@ -1,15 +1,15 @@
 ﻿<div>
     <div>
         <div class="btn-group" uib-dropdown dropdown-append-to-body>
-            <button id="btn-append-to-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+            <button id="btn-album-select" type="button" class="btn btn-primary" uib-dropdown-toggle>
                 Current album: {{selectedAlbum}} <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-album-select">
                 <li ng-repeat="name in albumNames" role="menuitem"><a href="/Angular/Gallery/{{name}}">{{name}}</a></li>
             </ul>
         </div>
         <div ng-show="isAuthenticated()">
-            <input class="form-control" type="text" ng-model="state.newAlbumName" />
+            <input class="form-control" type="text" ng-model="state.newAlbumName" placeholder="New album name"/>
             <button class="btn btn-primary" ng-click="createAlbum(state.newAlbumName)">Create album</button>
         </div>
     </div>
@@ -18,17 +18,36 @@
             {{format}}
         </label><input type="checkbox" ng-model="state.formatsFilter[format]" />
     </div>
-    <div class="container-fluid">
-        <div ng-repeat="albumName in getAlbums(selectedAlbum)">
-            <div id="{{albumName + $index}}"ng-class="getCurrentClass(albumName + $index)" ng-repeat="image in albums[albumName].images | byformat:state.formatsFilter" index="$index">
-                <div class="text-center" ng-bind="image.desc"></div>
-                {{$index}}
-                <span ng-show="albums[albumName].userId === currentUser.userId" class="glyphicon glyphicon-trash" ng-click="deleteImage(image, albumName)"></span>
-                <img id="{{albumName + $index}}img" ng-click="toggleImage(albumName + $index)"class="thumbnail" ng-style="getCurrentStyle(albumName + $index)" ng-src="{{image.image}}" />
-                <div class="text-center thumbnail">
-                    Posted at {{image.date}}
-                </div>
+    <div class="centered">
+        <div class="row">
+            <sds-pagination current-page="currentPage" number-of-pages="numberOfPages"
+                            get-data="getData" page-size="pageSize"></sds-pagination>
+            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                <button id="btn-page-sizes" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                    Images on page: {{pageSize}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-page-sizes">
+                    <li ng-repeat="size in pageSizes" role="menuitem"><a href="#" ng-click="setPageSize(size)">{{size}}</a></li>
+                </ul>
             </div>
         </div>
+    </div>
+    <div class="container-fluid">
+        <!--<div ng-repeat="albumName in getAlbums(selectedAlbum)">-->
+        <div id="{{selectedAlbum + $index}}" ng-class="getCurrentClass(selectedAlbum + $index)"
+             ng-repeat="image in albums[selectedAlbum].images | byformat:state.formatsFilter |startFrom:currentPage*pageSize | limitTo:pageSize" index="$index">
+            <div class="text-center" ng-bind="image.desc"></div>
+            {{$index}}
+            <span ng-show="showTrashIcon(albums[selectedAlbum].userId)" class="glyphicon glyphicon-trash" ng-click="deleteImage(image, selectedAlbum)"></span>
+            <img id="{{selectedAlbum + $index}}img" ng-click="toggleImage(selectedAlbum + $index)" class="thumbnail" ng-style="getCurrentStyle(selectedAlbum + $index)" ng-src="{{image.image}}" />
+            <div class="text-center thumbnail">
+                Posted at {{image.date}}
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+    <div class="centered">
+        <sds-pagination current-page="currentPage" number-of-pages="numberOfPages"
+                        get-data="getData" page-size="pageSize"></sds-pagination>
     </div>
 </div>
