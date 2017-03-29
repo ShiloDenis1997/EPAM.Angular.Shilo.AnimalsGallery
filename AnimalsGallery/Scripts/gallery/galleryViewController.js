@@ -42,7 +42,6 @@
             console.log(image);
             console.log(albumName);
             imageService.removeImageByImage(image, albumName);
-            //imageService.removeImage(albumName, index);
         }
 
         $scope.createAlbum = function (albumName) {
@@ -67,7 +66,7 @@
             }
             else {
                 return {
-                    height: 'auto',
+                    'max-height': 'calc(100vh - 150px)',
                     'max-width': '100%',
                     'margin-bottom': 0,
                     'margin-left': 'auto',
