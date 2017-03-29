@@ -28,6 +28,7 @@
             function (response) {
                 console.log("Cannot load albums");
                 console.log(response);
+                alert('Cannot load images from server. Try to refresh the page');
             });
 
     $http.get('/Pictures/GetAllFormats')
@@ -39,6 +40,7 @@
         },
             function (response) {
                 console.log('Cannot load image formats');
+                alert('Cannot load images from server. Try to refresh the page');
             });
 
     return {
@@ -47,7 +49,6 @@
         getImages: getImages,
         addImage: addImage,
         createAlbum: createAlbum,
-        removeImage: removeImage,
         getAlbumNames: getAlbumNames,
         removeImageByImage: removeImageByImage
     };
@@ -68,8 +69,10 @@
     }
 
     function addImage(albumName, image) {
-        if (albums[albumName] === undefined)
+        if (albums[albumName] === undefined) {
+            alert('Album with this name does not exists');
             return false;
+        }
 
         var imgData = { name: image.desc, data: image.image, albumName: albumName };
         $http.post('/Pictures/AddImage', imgData)
@@ -85,60 +88,46 @@
                 tryAddNewFormat(imgToAdd.format);
                 albums[albumName].images.push(imgToAdd);
                 albums[IMGSERVICE_CONSTANTS.all].images.push(imgToAdd);
+                alert('image loaded');
             },
                 function (response, status, header, config) {
                     console.log("Failed to post image");
                     console.log(response);
+                    alert('cannot load image');
                 });
         return true;
     }
 
     function createAlbum(albumName, userId) {
+        if (albumName === '') {
+            alert('Album name cannot be empty');
+            return;
+        }
+
         $http.post('/Pictures/CreateAlbum', { albumName: albumName, userId: userId })
             .then(function (response, status, header, config) {
                 if (response.data.status) {
                     albums[albumName] = { images: [], rating: 0, userId: userId };
                     albumNames.push(albumName);
                     console.log("album created");
+                    alert('Album created');
                 } else {
                     console.log("cannot create album");
+                    alert('Cannot create album');
                 }
             },
                 function (response, status, header, config) {
                     console.log("Failed to post image");
                     console.log(response);
+                    alert('cannot create album');
                 });
-    }
-
-    function removeImage(albumName, index) {
-        if (albums[albumName] === undefined)
-            return false;
-
-        var imageToRemove = albums[albumName].images[index];
-        if (imageToRemove == undefined)
-            return false;
-        console.log(imageToRemove);
-        $http.post('/Pictures/RemoveImage', { id: imageToRemove.id })
-            .then(function (response, status, header, config) {
-                console.log(response);
-                if (response.data.status) {
-                    albums[albumName].images.splice(index, 1);
-                    var indexOfImageFromAll = albums[IMGSERVICE_CONSTANTS.all].images.indexOf(imageToRemove);
-                    albums[IMGSERVICE_CONSTANTS.all].images.splice(indexOfImageFromAll, 1);
-                    console.log("removed");
-                } else
-                    console.log("cannot remove image");
-            },
-                function (response, status, header, config) {
-                    console.log("Failed to remove image");
-                    console.log(response);
-                });
-        return true;
     }
 
     function removeImageByImage(image, albumName) {
-        if (albums[albumName] === undefined)
+        if (albums[albumName] === undefined) {
+            alert('Album with this name does not exists');
             return false;
+        }
 
         var index = albums[albumName].images.indexOf(image);
         if (index == -1)
@@ -150,15 +139,21 @@
         $http.post('/Pictures/RemoveImage', { id: imageToRemove.id })
             .then(function (response, status, header, config) {
                 console.log(response);
-                if (response.data.status) {
-                    albums[albumName].images.splice(index, 1);
-                    console.log("removed");
-                } else
-                    console.log("cannot remove image");
-            },
+                    if (response.data.status) {
+                        albums[albumName].images.splice(index, 1);
+                        var indexOfImageFromAll = albums[IMGSERVICE_CONSTANTS.all].images.indexOf(imageToRemove);
+                        albums[IMGSERVICE_CONSTANTS.all].images.splice(indexOfImageFromAll, 1);
+                        console.log("removed");
+                        alert('Image removed');
+                    } else {
+                        console.log("cannot remove image");
+                        alert('Cannot remove image. Try again later');
+                    }
+                },
                 function (response, status, header, config) {
                     console.log("Failed to remove image");
                     console.log(response);
+                    alert('Cannot remove image. Try again later');
                 });
         return true;
     }

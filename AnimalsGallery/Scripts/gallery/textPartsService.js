@@ -1,5 +1,5 @@
 ﻿angular.module('gallery').service('textPartsService',
-        function($http) {
+        function ($http) {
             return {
                 getTextPart: getTextPart,
                 setTextPart: setTextPart

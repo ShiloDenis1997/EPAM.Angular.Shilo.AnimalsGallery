@@ -71,7 +71,8 @@ function ($scope, $route, $filter, $timeout, $anchorScroll,
     $scope.showTrashIcon = function (userId) {
         if ($scope.selectedAlbum === IMGSERVICE_CONSTANTS.all)
             return false;
-        return $scope.albums[$scope.selectedAlbum].userId == $scope.currentUser.userId;
+        return ($scope.albums[$scope.selectedAlbum].userId == $scope.currentUser.userId) 
+            || $scope.isAuthorized([$scope.userRoles.admin, $scope.userRoles.moderator]);
     }
 
     $scope.currentImgId = '';

@@ -61,10 +61,12 @@
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
                     console.log('User is not allowed');
+                    alert('Your have no rights to use this feature');
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                 } else {
                     // user is not logged in
                     console.log('User is not authenticated');
+                    alert('Only authenticated users can use this feature');
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                 }
             }

@@ -6,12 +6,12 @@
                 scope.isShowed = false;
 
                 scope.imageError = function () {
-                    console.log('error');
+                    //console.log('error');
                     scope.isShowed = false;
                 }
 
                 scope.imageLoaded = function () {
-                    console.log('loaded');
+                    //console.log('loaded');
                     scope.isShowed = true;
                 }
             }
@@ -41,7 +41,7 @@ angular.module('gallery')
               //console.log(attrs);
               //console.log(fn);
               elem.on('load', function (event) {
-                  console.log('loaded');
+                  //console.log('loaded');
                   scope.$apply(function () {
                       fn(scope, { $event: event });
                   });

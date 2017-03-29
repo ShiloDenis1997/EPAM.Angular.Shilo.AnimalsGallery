@@ -47,6 +47,7 @@
                 function (result) {
                     console.log("cannot load image");
                     console.log(result);
+                    alert('Cannot load this image. Try to download it and load from file');
                 });
         }
     }

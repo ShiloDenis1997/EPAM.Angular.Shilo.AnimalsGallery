@@ -60,8 +60,11 @@
                             console.log(res.data);
                             Session.create(res.data.id, credentials.login, res.data.rights);
                             setCookies();
+                        } else {
+                            alert('Cannot log in: ' + res.data.message);
                         }
-                    },function(res) {
+                    }, function (res) {
+                        alert('Cannot log because of some reason. Try to refresh the page');
                         console.log('log failed');
                         console.log(res);
                     });
@@ -76,9 +79,12 @@
                             console.log(res.data);
                             Session.create(res.data.id, credentials.login, res.data.rights);
                             setCookies();
+                        } else {
+                            alert('Cannot register: ' + res.data.message);
                         }
                     }, function (res) {
-                        console.log('log failed');
+                        alert('Cannot register because of some reason. Try to refresh the page');
+                        console.log('register failed');
                         console.log(res);
                     });
             }
@@ -92,11 +98,14 @@
                             if (result.data.status) {
                                 removeCookies();
                                 Session.destroy();
-                            } else
+                            } else {
                                 console.log('cannot log out');
+                                alert('Cannot log out because of some reason. Try again later');
+                            }
                         },
                         function(result) {
                             console.log('cannot log out');
+                            alert('Cannot log because of some reason. Try againt later');
                             console.log(result);
                         });
             };
