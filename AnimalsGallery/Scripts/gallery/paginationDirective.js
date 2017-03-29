@@ -11,7 +11,9 @@
             currentPage: '=',
             numberOfPages: '=',
             getData: '=',
-            pageSize: '='
+            pageSize: '=',
+            nextCallback: '=',
+            previousCallback: '='
         },
         templateUrl: '/Views/Directives/sdsPaginationDirective.html'
     }

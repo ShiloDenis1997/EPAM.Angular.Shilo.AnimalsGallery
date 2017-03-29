@@ -1,7 +1,11 @@
-﻿<button class="btn btn-info" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+﻿<button class="btn btn-info" 
+        ng-disabled="currentPage == 0" 
+        ng-click="currentPage=currentPage-1; previousCallback()">
     Previous
 </button>
 {{currentPage+1}}/{{numberOfPages()}}
-<button class="btn btn-info" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+<button class="btn btn-info" 
+        ng-disabled="currentPage >= getData().length/pageSize - 1" 
+        ng-click="currentPage=currentPage+1;nextCallback()">
     Next
 </button>

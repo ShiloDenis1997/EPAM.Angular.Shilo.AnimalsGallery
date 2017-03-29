@@ -48,6 +48,9 @@
             $locationProvider.html5Mode(true);
         }
     ])
+    .run(function($anchorScroll) {
+        $anchorScroll.yOffset = 50;
+    })
     .run(function ($rootScope, AUTH_EVENTS, AuthService, USER_ROLES) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
             console.log('event');

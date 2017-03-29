@@ -21,7 +21,9 @@
     <div class="centered">
         <div class="row">
             <sds-pagination current-page="currentPage" number-of-pages="numberOfPages"
-                            get-data="getData" page-size="pageSize"></sds-pagination>
+                            get-data="getData" page-size="pageSize"
+                            next-callback="newPageCallback"
+                            previous-callback="newPageCallback"></sds-pagination>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
                 <button id="btn-page-sizes" type="button" class="btn btn-primary" uib-dropdown-toggle>
                     Images on page: {{pageSize}} <span class="caret"></span>
@@ -33,21 +35,26 @@
         </div>
     </div>
     <div class="container-fluid">
-        <!--<div ng-repeat="albumName in getAlbums(selectedAlbum)">-->
         <div id="{{selectedAlbum + $index}}" ng-class="getCurrentClass(selectedAlbum + $index)"
              ng-repeat="image in albums[selectedAlbum].images | byformat:state.formatsFilter |startFrom:currentPage*pageSize | limitTo:pageSize" index="$index">
             <div class="text-center" ng-bind="image.desc"></div>
             {{$index}}
-            <span ng-show="showTrashIcon(albums[selectedAlbum].userId)" class="glyphicon glyphicon-trash" ng-click="deleteImage(image, selectedAlbum)"></span>
-            <img id="{{selectedAlbum + $index}}img" ng-click="toggleImage(selectedAlbum + $index)" class="thumbnail" ng-style="getCurrentStyle(selectedAlbum + $index)" ng-src="{{image.image}}" />
+            <span ng-show="showTrashIcon(albums[selectedAlbum].userId)" 
+                  class="glyphicon glyphicon-trash" 
+                  ng-click="deleteImage(image, selectedAlbum)"></span>
+            <img id="{{selectedAlbum + $index}}img" 
+                 ng-click="toggleImage(selectedAlbum + $index)" 
+                 class="thumbnail" ng-style="getCurrentStyle(selectedAlbum + $index)" 
+                 ng-src="{{image.image}}" />
             <div class="text-center thumbnail">
                 Posted at {{image.date}}
             </div>
         </div>
-        <!--</div>-->
     </div>
     <div class="centered">
         <sds-pagination current-page="currentPage" number-of-pages="numberOfPages"
-                        get-data="getData" page-size="pageSize"></sds-pagination>
+                        get-data="getData" page-size="pageSize"
+                        next-callback="newPageCallback"
+                        previous-callback="newPageCallback"></sds-pagination>
     </div>
 </div>
