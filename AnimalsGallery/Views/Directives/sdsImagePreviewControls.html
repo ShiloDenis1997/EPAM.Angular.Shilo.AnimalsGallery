@@ -1,0 +1,24 @@
+﻿<div class="container">
+        <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+                <label class="control-label">Image url</label>
+                <input class="form-control" id="imageLinkInput" type="text" ng-model="imageLink" name="urlPicture" />
+                <label class="control-label">Image name</label>
+                <input class="form-control" id="imageNameInput" type="text" ng-model="imageName" name="imageName" />
+                
+                <div class="btn-group control-label" uib-dropdown dropdown-append-to-body>
+                    <button id="btn-append-to-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                        Album: {{albumName}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+                        <li ng-repeat="name in albumNames |filter:albumMatch()" role="menuitem" ng-click="selectAlbum(name)"><a href="#">{{name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <sds-image-preview image-link="imageLink" image-name="imageName"
+                       get-image-style="getImageStyle" get-image-container-class="getImageContainerClass"
+                       image-date="'dd.mm.yyyy hh:mm:ss'" image-id="42">
+        
+    </sds-image-preview>
+</div>

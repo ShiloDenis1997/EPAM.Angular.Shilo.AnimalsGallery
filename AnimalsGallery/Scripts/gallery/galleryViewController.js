@@ -76,6 +76,24 @@ function ($scope, $route, $filter, $timeout, $anchorScroll,
 
     $scope.currentImgId = '';
 
+    $scope.getCurrentClassFunction = function(imgId) {
+        return function() {
+            return $scope.getCurrentClass(imgId);
+        }    
+    }
+
+    $scope.getCurrentStyleFunction = function (imgId) {
+        return function () {
+            return $scope.getCurrentStyle(imgId);
+        }
+    }
+
+    $scope.getToggleImageFunction = function(imgId) {
+        return function() {
+            $scope.toggleImage(imgId);
+        }
+    }
+
     $scope.getCurrentClass = function (imgId) {
         if ($scope.currentImgId !== imgId) {
             return "landscape col-xs-12 col-sm-6 col-md-4 col-lg-3";
@@ -109,7 +127,7 @@ function ($scope, $route, $filter, $timeout, $anchorScroll,
         }
         //$scope.gotoAnchor(imgId);
         $timeout(function () { $scope.gotoAnchor(imgId); }, 100);
-        console.log(imgId);
+        //console.log(imgId);
     }
 
     $scope.gotoAnchor = function (hash) {

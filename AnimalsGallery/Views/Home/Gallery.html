@@ -9,7 +9,7 @@
             </ul>
         </div>
         <div ng-show="isAuthenticated()">
-            <input class="form-control" type="text" ng-model="state.newAlbumName" placeholder="New album name"/>
+            <input class="form-control" type="text" ng-model="state.newAlbumName" placeholder="New album name" />
             <button class="btn btn-primary" ng-click="createAlbum(state.newAlbumName)">Create album</button>
         </div>
     </div>
@@ -35,21 +35,16 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div id="{{selectedAlbum + $index}}" ng-class="getCurrentClass(selectedAlbum + $index)"
-             ng-repeat="image in albums[selectedAlbum].images | byformat:state.formatsFilter |startFrom:currentPage*pageSize | limitTo:pageSize" index="$index">
-            <div class="text-center" ng-bind="image.desc"></div>
-            {{$index}}
-            <span ng-show="showTrashIcon(albums[selectedAlbum].userId)" 
-                  class="glyphicon glyphicon-trash" 
-                  ng-click="deleteImage(image, selectedAlbum)"></span>
-            <img id="{{selectedAlbum + $index}}img" 
-                 ng-click="toggleImage(selectedAlbum + $index)" 
-                 class="thumbnail" ng-style="getCurrentStyle(selectedAlbum + $index)" 
-                 ng-src="{{image.image}}" />
-            <div class="text-center thumbnail">
-                Posted at {{image.date}}
-            </div>
-        </div>
+        <sds-image-preview ng-repeat="image in albums[selectedAlbum].images | byformat:state.formatsFilter |startFrom:currentPage*pageSize | limitTo:pageSize" index="$index"
+                           image-id="selectedAlbum + $index" image-name="image.desc"
+                           image-link="image.image" image-date="image.date"
+                           on-image-click="toggleImage"
+                           get-image-style="getCurrentStyle"
+                           get-image-container-class="getCurrentClass">
+            <span ng-show="showTrashIcon(albums[selectedAlbum].userId)"
+                  class="glyphicon glyphicon-trash" ng-click="deleteImage(image, selectedAlbum)">
+            </span>
+        </sds-image-preview>
     </div>
     <div class="centered">
         <sds-pagination current-page="currentPage" number-of-pages="numberOfPages"
