@@ -50,14 +50,12 @@
                     <div class="collapse navbar-collapse" id="menuNavbar">
                         <ul class="nav navbar-nav">
                             <li id="albumsDropdown" class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="/Angular/Albums">Albums</a>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="/Angular/Gallery">Gallery</a>
                                 <ul class="dropdown-menu">
-                                    <li><a id="allAlbumsLink" href="/Angular/Albums">All albums</a></li>
-                                    <li><a id="myAlbumsLink" href="/Angular/Gallery">My albums</a></li>
+                                    <li><a id="galleryLink" href="/Angular/Gallery">Images</a></li>
+                                    <li ng-show="isAuthenticated()"><a id="addImageLink" href="/Angular/AddImage">Add image</a></li>
                                 </ul>
                             </li>
-                            <li><a id="galleryLink" href="/Angular/Gallery">Gallery</a></li>
-                            <li ng-show="isAuthenticated()"><a id="addImageLink" href="/Angular/AddImage">Add image</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             @*<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>*@
@@ -68,10 +66,6 @@
             </nav>
         </div>
     </div>
-
-<div ng-show="isAuthorized(userRoles.admin)">You're admin.</div>
-<div ng-show="isAuthorized(userRoles.moderator)">You're moderator.</div>
-<div ng-show="isAuthorized(userRoles.user)">You're user</div>
 @RenderBody()
 <script src="~/Scripts/gallery/galleryModuleInit.js"></script>
 <script src="~/Scripts/gallery/indexController.js"></script>
